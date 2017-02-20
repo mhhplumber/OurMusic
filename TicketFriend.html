@@ -1,0 +1,88 @@
+header('content-type: application/json; charset=utf-8');
+	header("access-control-allow-origin: *");
+<!DOCTYPE html>
+<html>
+	<style>
+		head {
+			position: absolute;
+			background-color: #8cb8ff;
+			height: 15%;
+		}
+		h1 {
+			font-family: Arial;
+			color:#fff;
+
+		}
+		body {
+			background-color: #b5d1ff;
+		}
+		.centerfield {
+			position:absolute;
+			align-self: center;
+			top: 40%;
+    		left:30%;
+		}
+		.searchbar {
+			border-radius: 7px;
+			width:80%;
+			align-self: center;
+		}
+	</style>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	</head>
+	<body>
+		<h1>
+			OurMusic.
+		</h1>
+
+		<div class = "centerfield" ng-app>
+
+			<form>
+				<h1 style = "color:#fff; font-family:Arial">
+					Find the music you want to hear.
+				</h1>
+				<input class = searchbar id = "searchbar" type="searchbar" ng-model = "keyWord" ng-change = "searchFunc">
+					
+				</input>
+				<button id="psh" >SEARCH</button>
+			</form>
+			<h1>
+				{{keyWord}}
+			</h1>
+		</div>
+		<div>
+
+			
+		</div>
+
+		<script ng-model = "tweet" >
+
+		$.ajaxSetup({
+type: 'POST',
+timeout: 30000,
+error: function(xhr) {
+    $('#display_error')
+    .html('Error: ' + xhr.status + ' ' + xhr.statusText);
+                     }
+             })
+
+				document.getElementById("psh").addEventListener("click", function(){
+					document.getElementById("psh").innerHTML = "nope";
+				    $.ajax({
+				    	url: "http://LAPTOP-44299IGM:5000/search_events",
+				    	data: 'city: "Seattle"',
+				    	type: "POST",
+				    	contentType: "x-www-form-urlencoded",
+				    	}).done(function(data, status){
+				        //{{tweet}} = data
+				        console.log(data);
+				        
+
+				    })});
+
+			</script>
+	</body>
+</html>
